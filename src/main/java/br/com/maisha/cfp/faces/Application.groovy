@@ -1,12 +1,14 @@
 package br.com.maisha.cfp.faces;
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 
 import br.com.maisha.cfp.faces.login.LoginBox
+import br.com.maisha.cfp.faces.ui.event.OpenCloseWindowEvent
 
+import com.google.common.eventbus.EventBus
+import com.google.common.eventbus.Subscribe
 import com.vaadin.annotations.Theme
-import com.vaadin.navigator.Navigator
-import com.vaadin.server.Page
 import com.vaadin.server.VaadinRequest
 import com.vaadin.ui.Component
 import com.vaadin.ui.CssLayout
@@ -26,11 +28,15 @@ import com.vaadin.ui.UI
 @Theme("dashboard")
 public class Application extends UI {
 
+	@Autowired def EventBus eventBus;
+
 	/**
 	 * 
 	 * @see com.vaadin.ui.UI#init(com.vaadin.server.VaadinRequest)
 	 */
 	protected void init(VaadinRequest request) {
+		eventBus.register(this)
+
 		setContent(new CssLayout());
 		content.addStyleName("root");
 		content.setSizeFull();
@@ -61,5 +67,17 @@ public class Application extends UI {
 	private void buildMainLayout() {
 		def main = new MainLayout(this)
 		content.addComponent(main)
+	}
+
+	/**
+	 * Listen to requests asking for open or close a Window.
+	 * 
+	 * @param evt Information about the window to be opened/closed.
+	 */
+	@Subscribe public void openWindow(OpenCloseWindowEvent evt){
+		if(evt.mustOpen())
+			this.addWindow(evt.getWindow())
+		else
+			this.removeWindow(evt.getWindow())
 	}
 }

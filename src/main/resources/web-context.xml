@@ -7,7 +7,12 @@
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:annotation-config/>
-	<context:component-scan base-package="br.com.maisha.cfp"/>
+	<context:annotation-config />
+	<context:component-scan base-package="br.com.maisha.cfp" />
 
+	<bean name="eventBus" class="com.google.common.eventbus.EventBus"
+		scope="singleton" />
+
+	<bean name="beanContext" class="br.com.maisha.cfp.context.BeanContextAware"
+		scope="singleton" />
 </beans>

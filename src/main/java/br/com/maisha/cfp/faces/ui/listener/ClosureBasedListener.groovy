@@ -5,14 +5,17 @@ import com.vaadin.ui.Component.Listener
 
 class ClosureBasedListener implements Listener{
 
+	def Class eventType
 	def Closure callback
 
-	public ClosureBasedListener(Closure cl){
+	public ClosureBasedListener(Class eventType, Closure cl){
 		this.callback  = cl
+		this.eventType = eventType
 	}
 
 	@Override
 	public void componentEvent(Event event) {
-		callback.call(event)
+		if(event in eventType)
+			callback.call(event)
 	}
 }

@@ -1,5 +1,10 @@
 package br.com.maisha.cfp.faces.ui
 
+import br.com.maisha.cfp.context.BeanContextAware
+import br.com.maisha.cfp.faces.ui.event.OpenCloseWindowEvent
+import br.com.maisha.cfp.faces.ui.listener.ClosureBasedListener
+
+import com.google.common.eventbus.EventBus
 import com.vaadin.ui.Alignment
 import com.vaadin.ui.Button
 import com.vaadin.ui.Component
@@ -7,34 +12,33 @@ import com.vaadin.ui.HorizontalLayout
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.Window
 import com.vaadin.ui.Button.ClickEvent
-import com.vaadin.ui.Button.ClickListener
+import com.vaadin.ui.Window.CloseEvent
+import com.vaadin.ui.Window.CloseListener
+
 
 
 class ConfirmWindow extends Window {
 
-	private VerticalLayout body
-	
-	private Map listeners
+	def EventBus eventBus
 
-	public ConfirmWindow(String caption){
+	public ConfirmWindow(String caption, Component body){
 		super(caption)
+
+		eventBus = BeanContextAware.get().getBean("eventBus")
+
 		setModal(true)
 		setResizable(false)
 		setWidth("450px")
 		setHeight("270px")
-		
 		center()
-
-		init()
-		
+		init(body)
 	}
 
-	private void init(){
+	private void init(Component body){
 		VerticalLayout contents = new VerticalLayout()
 		contents.setSizeFull()
 
 		//form
-		body = new VerticalLayout()
 		body.setSizeFull()
 		contents.addComponent(body)
 		contents.setExpandRatio(body, 1f)
@@ -46,12 +50,9 @@ class ConfirmWindow extends Window {
 		hl.addStyleName("window-button-bar")
 
 		Button cancel = new Button("Cancelar")
+		cancel.addListener(new ClosureBasedListener (ClickEvent, close))
+
 		Button save = new Button("Salvar")
-		save.addClickListener(new ClickListener(){
-			void buttonClick(ClickEvent evt) {
-				listeners.save.call(evt)
-			};
-		});
 		save.addStyleName("default")
 
 		hl.addComponent(cancel)
@@ -64,13 +65,14 @@ class ConfirmWindow extends Window {
 		contents.setComponentAlignment(hl, Alignment.BOTTOM_LEFT)
 
 		setContent(contents)
+		addListener(new ClosureBasedListener(CloseEvent, close))
 	}
 
-	public void when(map){
-		this.listeners = map;
+	public close = {
+		eventBus.post(new OpenCloseWindowEvent(this, false))
 	}
-	
-	public void setBody(Component c){
-		body.addComponent(c)
+
+	public open = {
+		eventBus.post(new OpenCloseWindowEvent(this))
 	}
 }
