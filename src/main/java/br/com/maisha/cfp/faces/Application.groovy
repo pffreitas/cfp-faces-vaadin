@@ -76,7 +76,12 @@ public class Application extends UI {
 	 */
 	@Subscribe public void openWindow(OpenCloseWindowEvent evt){
 		if(evt.mustOpen())
-			this.addWindow(evt.getWindow())
+			try {
+				this.addWindow(evt.getWindow())
+			} catch(IllegalArgumentException e){
+				this.removeWindow(evt.getWindow())
+				this.addWindow(evt.getWindow())
+			}
 		else
 			this.removeWindow(evt.getWindow())
 	}

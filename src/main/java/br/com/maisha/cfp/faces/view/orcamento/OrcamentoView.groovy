@@ -3,11 +3,14 @@ package br.com.maisha.cfp.faces.view.orcamento
 import br.com.maisha.cfp.business.OrcamentoBusiness
 import br.com.maisha.cfp.context.BeanContext
 import br.com.maisha.cfp.context.BeanContextAware
-import br.com.maisha.cfp.faces.ui.ConfirmWindow
-import br.com.maisha.cfp.faces.ui.listener.ClosureBasedListener
+import br.com.maisha.cfp.faces.ui.event.RepositoryChangedEvent
+import br.com.maisha.cfp.faces.ui.listener.GenericListener
+import br.com.maisha.cfp.faces.view.categoria.CategoriaView
 import br.com.maisha.cfp.model.Orcamento
+import br.com.maisha.cfp.repositories.OrcamentoRepository
 
 import com.google.common.eventbus.EventBus
+import com.google.common.eventbus.Subscribe
 import com.vaadin.navigator.View
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent
 import com.vaadin.ui.Alignment
@@ -15,7 +18,6 @@ import com.vaadin.ui.Button
 import com.vaadin.ui.CssLayout
 import com.vaadin.ui.HorizontalLayout
 import com.vaadin.ui.Label
-import com.vaadin.ui.Layout
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.Button.ClickEvent
 
@@ -30,11 +32,11 @@ import com.vaadin.ui.Button.ClickEvent
  */
 class OrcamentoView extends VerticalLayout implements View{
 
-	/** */
-	def categoriaPanel
+	/** Categoria View. */
+	def CategoriaView categoriaView
 
 	/** Corpo desta view. */
-	def Layout body
+	def CssLayout body
 
 	/** Servicos para o gerenciamento de Orcamentos. */
 	def OrcamentoBusiness oBusiness;
@@ -62,9 +64,10 @@ class OrcamentoView extends VerticalLayout implements View{
 
 		//body
 		body = createBody();
-		loadOrcamentos();
+		loadOrcamentos(new RepositoryChangedEvent("orcamentoRepository"));
 
 		eventBus = BeanContextAware.get().getBean("eventBus")
+		eventBus.register(this)
 	}
 
 
@@ -80,7 +83,7 @@ class OrcamentoView extends VerticalLayout implements View{
 	}
 
 	private void createHeader(HorizontalLayout top){
-		final Label title = new Label("Orcamento");
+		final Label title = new Label("Orcamentos");
 		title.setSizeUndefined();
 		title.addStyleName("h1");
 		top.addComponent(title);
@@ -90,10 +93,12 @@ class OrcamentoView extends VerticalLayout implements View{
 	private void createToolbar(HorizontalLayout top){
 		HorizontalLayout toolbar = new HorizontalLayout()
 
-		def add = new Button("Add")
-		add.addListener(new ClosureBasedListener(ClickEvent, {
-			new ConfirmWindow("Novo Orcamento", new OrcamentoForm()).open()
-		}))
+		def add = new Button("+")
+		add.setStyleName("small")
+		add.addListener(new GenericListener(ClickEvent, {
+			new OrcamentoFormWindow().open()
+		}
+		))
 		toolbar.addComponent(add);
 		toolbar.setComponentAlignment(add, Alignment.MIDDLE_LEFT);
 
@@ -111,17 +116,28 @@ class OrcamentoView extends VerticalLayout implements View{
 		return body;
 	}
 
-	private void loadOrcamentos(){
-		body.removeAllComponents()
+	@Subscribe public void loadOrcamentos(RepositoryChangedEvent rce){
+		if(rce.repoName == "orcamentoRepository"){
+			def OrcamentoRepository repo = BeanContext.get().getBean(rce.repoName)
+			body.removeAllComponents()
+			def orcamentos = repo.findAll();
 
-		def orcamentos = oBusiness.getOrcamentoRepository().findAll();
-
-		orcamentos.each { Orcamento o ->
-			def ow = new OrcamentoWidget(o)
-			body.addComponent(ow)
+			orcamentos.each { Orcamento o ->
+				def ow = new OrcamentoWidget(o)
+				ow.onClick orcamentoWidgetClicked
+				body.addComponent(ow)
+			}
 		}
 	}
 
+	def orcamentoWidgetClicked = { OrcamentoWidget ow, event ->
+		if(categoriaView)
+			body.removeComponent(categoriaView)
+
+		categoriaView = new CategoriaView(ow.orcamento)
+		def owIdx = body.getComponentIndex(ow)
+		body.addComponent(categoriaView, owIdx + 1)
+	}
 
 	@Override
 	public void enter(ViewChangeEvent event) {

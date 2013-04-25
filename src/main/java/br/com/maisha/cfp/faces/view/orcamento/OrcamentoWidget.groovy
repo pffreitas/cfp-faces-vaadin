@@ -25,7 +25,7 @@ import com.vaadin.ui.themes.BaseTheme;
  */
 class OrcamentoWidget extends VerticalLayout implements LayoutClickListener, ClickListener{
 
-	
+	 
 	def List<Closure> listeners = []
 	
 	/** Orcamento a ser representado pelo widget. */
@@ -55,6 +55,7 @@ class OrcamentoWidget extends VerticalLayout implements LayoutClickListener, Cli
 		Button b = new Button(orcamento.nome)
 		b.setStyleName(BaseTheme.BUTTON_LINK)
 		b.addClickListener(this)
+		b.addStyleName("h4")
 		addComponent(b)
 		setComponentAlignment(b, Alignment.TOP_CENTER)
 	}
@@ -82,9 +83,8 @@ class OrcamentoWidget extends VerticalLayout implements LayoutClickListener, Cli
 	} 
 
 	def void clicked(event){
-		new Notification("aaaa").show(Page.getCurrent())
 		addStyleName("orcamento-wgt-selected")
-		listeners.each { it.call(this, event) }
+		listeners?.each { it?.call(this, event) }
 	}
 	
 	def void onClick(Closure cl){
