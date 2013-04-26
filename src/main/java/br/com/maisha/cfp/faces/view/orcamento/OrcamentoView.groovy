@@ -20,6 +20,7 @@ import com.vaadin.ui.HorizontalLayout
 import com.vaadin.ui.Label
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.Button.ClickEvent
+import com.vaadin.ui.themes.BaseTheme;
 
 
 /**
@@ -93,8 +94,9 @@ class OrcamentoView extends VerticalLayout implements View{
 	private void createToolbar(HorizontalLayout top){
 		HorizontalLayout toolbar = new HorizontalLayout()
 
-		def add = new Button("+")
-		add.setStyleName("small")
+		def add = new Button()
+		add.setStyleName(BaseTheme.BUTTON_LINK)
+		add.addStyleName("add flatten-button")
 		add.addListener(new GenericListener(ClickEvent, {
 			new OrcamentoFormWindow().open()
 		}

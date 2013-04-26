@@ -1,0 +1,9 @@
+--- 
+applications: 
+- path: .
+  name: cfp-faces-vaadin
+  memory: 512M
+  instances: 1
+  framework: spring
+  url: richman.${target-base}
+  runtime: java

@@ -10,6 +10,7 @@ import br.com.maisha.cfp.repositories.CategoriaRepository
 
 import com.google.common.eventbus.EventBus
 import com.google.common.eventbus.Subscribe
+import com.vaadin.server.ThemeResource
 import com.vaadin.ui.Alignment
 import com.vaadin.ui.Button
 import com.vaadin.ui.CssLayout
@@ -17,9 +18,13 @@ import com.vaadin.ui.HorizontalLayout
 import com.vaadin.ui.Label
 import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.Button.ClickEvent
+import com.vaadin.ui.themes.BaseTheme
 
 class CategoriaView extends CssLayout{
+	
 	private VerticalLayout categoriesContainer
+	
+	private CssLayout subcategoriesContainer
 
 	def Orcamento orcParent
 
@@ -73,8 +78,10 @@ class CategoriaView extends CssLayout{
 	private void createToolbar(HorizontalLayout top){
 		HorizontalLayout toolbar = new HorizontalLayout()
 
-		def add = new Button("add")
-		add.setStyleName("small")
+		def add = new Button()
+		add.setStyleName(BaseTheme.BUTTON_LINK)
+		//add.setIcon(new ThemeResource("img/plus.png"))
+		add.addStyleName("add flatten-button")
 		add.addListener(new GenericListener(ClickEvent, {
 			new CategoriaFormWindow(orcParent).open()
 		}
@@ -92,10 +99,15 @@ class CategoriaView extends CssLayout{
 		addComponent(body)
 
 		categoriesContainer = new VerticalLayout()
-		categoriesContainer.setWidth("100%")
 		categoriesContainer.setMargin(true)
+		categoriesContainer.setSpacing(true)
 		body.addComponent(categoriesContainer)
 		body.setExpandRatio(categoriesContainer, 1)
+		
+		subcategoriesContainer = new CssLayout()
+		subcategoriesContainer.setSizeFull()
+		body.addComponent(subcategoriesContainer)
+		body.setExpandRatio(subcategoriesContainer, 3)
 	}
 
 	@Subscribe public void loadCategorias(RepositoryChangedEvent rce){
@@ -127,9 +139,8 @@ class CategoriaView extends CssLayout{
 				clickedBt.addStyleName(styleActive)
 			}
 
-			def subcategoriaView = new SubcategoriaView(clickedBt.getData())
-			body.addComponent(subcategoriaView)
-			body.setExpandRatio(subcategoriaView, 3)
+			subcategoriesContainer.removeAllComponents()
+			subcategoriesContainer.addComponent(new SubcategoriaView(clickedBt.getData()))
 		}
 	}
 }
