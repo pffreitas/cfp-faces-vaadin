@@ -1,6 +1,9 @@
 
 @mixin dashboard-orcamento {
 
+	.view-title{
+		padding-right: 0.5em !important;
+	}
 
 	.orcamento-wgt{
 		margin: 10px;

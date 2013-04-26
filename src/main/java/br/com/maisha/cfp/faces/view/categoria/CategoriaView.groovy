@@ -70,7 +70,7 @@ class CategoriaView extends CssLayout{
 	private void createHeader(HorizontalLayout top){
 		final Label title = new Label(orcParent.nome);
 		title.setSizeUndefined();
-		title.addStyleName("h1");
+		title.addStyleName("h1 view-title");
 		top.addComponent(title);
 		top.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
 	}

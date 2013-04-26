@@ -86,7 +86,7 @@ class OrcamentoView extends VerticalLayout implements View{
 	private void createHeader(HorizontalLayout top){
 		final Label title = new Label("Orcamentos");
 		title.setSizeUndefined();
-		title.addStyleName("h1");
+		title.addStyleName("h1 view-title");
 		top.addComponent(title);
 		top.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
 	}
