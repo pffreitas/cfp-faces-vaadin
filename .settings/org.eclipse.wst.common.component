@@ -1,12 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="cfp-faces-vaadin">
-        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/groovy"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <property name="java-output-path" value="/cfp-faces-vaadin/target/classes"/>
-        <property name="context-root" value="cfp-faces-vaadin"/>
-    </wb-module>
+<project-modules id="moduleCoreId" project-version="2.0">
+	<wb-module deploy-name="cfp-faces-vaadin">
+		<property name="context-root" value="cfp-faces-vaadin"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/groovy"/>
+		<wb-resource deploy-path="/" source-path="src/main/webapp"/>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/cfp-business/cfp-business">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/com.vaadin/vaadin-shared/7.0.2/jar/618d2bd5ea250be91b44ab0d9199c1246ad31b6/vaadin-shared-7.0.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/com.google.guava/guava/14.0.1/bundle/69e12f4c6aeac392555f1ea86fab82b5e5e31ad4/guava-14.0.1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/com.vaadin/vaadin-shared-deps/1.0.2/jar/6e5d9caa40b2d94cb7d917bf295b809913335b2f/vaadin-shared-deps-1.0.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.springframework/spring-aop/3.2.1.RELEASE/jar/38e6fd56d0b2b47fedb29fad6deb779ebe583023/spring-aop-3.2.1.RELEASE.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.springframework/spring-beans/3.2.1.RELEASE/jar/ae8b65a7dbd0e74044c903f5b7078a09b1671266/spring-beans-3.2.1.RELEASE.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.apache.commons/commons-jexl/2.1.1/jar/6ecc181debade00230aa1e17666c4ea0371beaaa/commons-jexl-2.1.1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.springframework/spring-core/3.2.1.RELEASE/jar/5d4de12a025fcfe3be8e85d3e2ff4686e227287a/spring-core-3.2.1.RELEASE.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.jsoup/jsoup/1.6.3/jar/5cf4f55a71ae352d9c13ede8388974527540e506/jsoup-1.6.3.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/commons-cli/commons-cli/1.2/jar/2bf96b7aa8b611c177d329452af1dc933e14501c/commons-cli-1.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/net.sourceforge.cssparser/cssparser/0.9.5/jar/7222f4a7e50fc57a88a546a228088524bdbbdaea/cssparser-0.9.5.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.slf4j/slf4j-api/1.6.6/jar/ce53b0a0e2cfbb27e8a59d38f79a18a5c6a8d2b0/slf4j-api-1.6.6.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.springframework/spring-context/3.2.1.RELEASE/jar/f3979526bc76f92a92cfa7444bf2575cc7b95c8f/spring-context-3.2.1.RELEASE.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/com.vaadin/vaadin-themes/7.0.2/jar/227fab2eaf30e496c3f1e01b2e495d041d94e70f/vaadin-themes-7.0.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/ru.xpoft.vaadin/spring-vaadin-integration/1.6.6/jar/6ab2d59fc5cd3df5fbd842670c981a2619a5c9fe/spring-vaadin-integration-1.6.6.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.springframework/spring-expression/3.2.1.RELEASE/jar/ad094bbe9e4d9b48be3604e3590a9277b2e0dba1/spring-expression-3.2.1.RELEASE.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/postgresql/postgresql/9.1-901.jdbc4/jar/153f2f92a786f12fc111d0111f709012df87c808/postgresql-9.1-901.jdbc4.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.codehaus.groovy/groovy-all/1.8.2/jar/9250ee172f5de4e1b9c41198b2d3e5d5ec8f33f0/groovy-all-1.8.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.w3c.css/sac/1.3/jar/cdb2dcb4e22b83d6b32b93095f644c3462739e82/sac-1.3.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/com.vaadin/vaadin-client-compiled/7.0.2/jar/cb70b3781aa8164965f8ddee5ddb0480e8f3b611/vaadin-client-compiled-7.0.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/com.vaadin/vaadin-theme-compiler/7.0.2/jar/5e29c9aad39eb702316d1db9c3e58bd2deaa9e0c/vaadin-theme-compiler-7.0.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/aopalliance/aopalliance/1.0/jar/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/org.springframework/spring-web/3.2.1.RELEASE/jar/e45a35446b311f401de84d93330a5dbdbfc4c70/spring-web-3.2.1.RELEASE.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/commons-logging/commons-logging/1.1.1/jar/5043bfebc3db072ed80fbd362e7caf00e885d8ae/commons-logging-1.1.1.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/pfreitas/.gradle/caches/artifacts-15/filestore/com.vaadin/vaadin-server/7.0.2/jar/81d1974404dab6e12915d697439b808598301770/vaadin-server-7.0.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+	</wb-module>
 </project-modules>

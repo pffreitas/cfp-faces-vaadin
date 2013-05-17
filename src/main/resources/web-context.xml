@@ -10,9 +10,9 @@
 	<context:annotation-config />
 	<context:component-scan base-package="br.com.maisha.cfp" />
 
+
 	<bean name="eventBus" class="com.google.common.eventbus.EventBus"
 		scope="singleton" />
 
-	<bean name="beanContext" class="br.com.maisha.cfp.context.BeanContextAware"
-		scope="singleton" />
+	
 </beans>
