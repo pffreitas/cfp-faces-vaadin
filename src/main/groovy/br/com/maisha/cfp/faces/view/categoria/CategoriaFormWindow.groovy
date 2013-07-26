@@ -4,6 +4,7 @@ package br.com.maisha.cfp.faces.view.categoria
 
 import br.com.maisha.cfp.business.OrcamentoBusiness
 import br.com.maisha.cfp.context.BeanContextAware
+import br.com.maisha.cfp.faces.Application
 import br.com.maisha.cfp.faces.ui.event.OpenCloseWindowEvent
 import br.com.maisha.cfp.faces.ui.event.RepositoryChangedEvent
 import br.com.maisha.cfp.faces.ui.listener.GenericListener
@@ -49,7 +50,7 @@ class CategoriaFormWindow extends Window {
 	public CategoriaFormWindow(Orcamento orcParent){
 		super("Nova Categoria")
 
-		eventBus = BeanContextAware.get().getBean("eventBus")
+		eventBus = Application.current.data.eventBus
 		oBusiness = BeanContextAware.get().getBean("orcamentoBusiness")
 
 		setModal(true)

@@ -1,6 +1,5 @@
 package br.com.maisha.cfp.faces;
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 
 import br.com.maisha.cfp.faces.login.LoginBox
@@ -28,15 +27,19 @@ import com.vaadin.ui.UI
 @Theme("dashboard")
 public class Application extends UI {
 
-	@Autowired def EventBus eventBus;
+	def EventBus eventBus;
 
 	/**
 	 * 
 	 * @see com.vaadin.ui.UI#init(com.vaadin.server.VaadinRequest)
 	 */
 	protected void init(VaadinRequest request) {
+		setData([:])
+		
+		eventBus = new EventBus()
 		eventBus.register(this)
-
+		data.eventBus = eventBus
+		
 		setContent(new CssLayout());
 		content.addStyleName("root");
 		content.setSizeFull();

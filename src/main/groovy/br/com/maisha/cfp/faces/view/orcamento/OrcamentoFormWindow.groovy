@@ -4,6 +4,7 @@ package br.com.maisha.cfp.faces.view.orcamento
 
 import br.com.maisha.cfp.business.OrcamentoBusiness
 import br.com.maisha.cfp.context.BeanContextAware
+import br.com.maisha.cfp.faces.Application
 import br.com.maisha.cfp.faces.ui.event.OpenCloseWindowEvent
 import br.com.maisha.cfp.faces.ui.event.RepositoryChangedEvent
 import br.com.maisha.cfp.faces.ui.listener.GenericListener
@@ -14,6 +15,7 @@ import com.google.common.eventbus.EventBus
 import com.vaadin.data.fieldgroup.FieldGroup
 import com.vaadin.data.util.ObjectProperty
 import com.vaadin.data.util.PropertysetItem
+import com.vaadin.server.ClientConnector.AttachListener
 import com.vaadin.ui.Alignment
 import com.vaadin.ui.Button
 import com.vaadin.ui.ComboBox
@@ -50,7 +52,8 @@ class OrcamentoFormWindow extends Window {
 	public OrcamentoFormWindow(){
 		super("Novo Orcamento")
 
-		eventBus = BeanContextAware.get().getBean("eventBus")
+		eventBus = Application.current.data.eventBus
+
 		oBusiness = BeanContextAware.get().getBean("orcamentoBusiness")
 
 		setModal(true)
@@ -59,7 +62,9 @@ class OrcamentoFormWindow extends Window {
 		setHeight("270px")
 		center()
 		init()
+
 	}
+
 
 	private void init(){
 		VerticalLayout contents = new VerticalLayout()

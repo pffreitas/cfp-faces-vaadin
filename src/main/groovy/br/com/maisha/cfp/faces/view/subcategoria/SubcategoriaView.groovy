@@ -3,6 +3,7 @@ package br.com.maisha.cfp.faces.view.subcategoria
 import org.springframework.format.number.CurrencyFormatter
 
 import br.com.maisha.cfp.context.BeanContextAware
+import br.com.maisha.cfp.faces.Application;
 import br.com.maisha.cfp.faces.ui.event.RepositoryChangedEvent
 import br.com.maisha.cfp.faces.ui.listener.GenericListener
 import br.com.maisha.cfp.model.Categoria
@@ -33,7 +34,7 @@ class SubcategoriaView extends VerticalLayout{
 	public SubcategoriaView(Categoria pCategoria){
 		categoria = pCategoria
 
-		eventBus = BeanContextAware.get().getBean("eventBus")
+		eventBus = Application.current.data.eventBus
 		eventBus.register(this)
 
 		init()

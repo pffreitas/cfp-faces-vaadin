@@ -1,6 +1,7 @@
 package br.com.maisha.cfp.faces.view.categoria
 
 import br.com.maisha.cfp.context.BeanContextAware
+import br.com.maisha.cfp.faces.Application;
 import br.com.maisha.cfp.faces.ui.event.RepositoryChangedEvent
 import br.com.maisha.cfp.faces.ui.listener.GenericListener
 import br.com.maisha.cfp.faces.view.subcategoria.SubcategoriaView
@@ -35,7 +36,7 @@ class CategoriaView extends CssLayout{
 
 		init()
 
-		eventBus = BeanContextAware.get().getBean("eventBus")
+		eventBus = Application.current.data.eventBus
 		eventBus.register(this)
 	}
 

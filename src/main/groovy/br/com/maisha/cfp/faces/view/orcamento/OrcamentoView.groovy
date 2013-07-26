@@ -12,6 +12,8 @@ import com.google.common.eventbus.EventBus
 import com.google.common.eventbus.Subscribe
 import com.vaadin.navigator.View
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent
+import com.vaadin.server.ClientConnector.AttachEvent
+import com.vaadin.server.ClientConnector.AttachListener
 import com.vaadin.ui.Alignment
 import com.vaadin.ui.Button
 import com.vaadin.ui.CssLayout
@@ -30,7 +32,7 @@ import com.vaadin.ui.themes.BaseTheme
  * @author Paulo Freitas (pfreitas1@gmail.com)
  *
  */
-class OrcamentoView extends VerticalLayout implements View{
+class OrcamentoView extends VerticalLayout implements View, AttachListener{
 
 	/** Categoria View. */
 	def CategoriaView categoriaView
@@ -66,10 +68,19 @@ class OrcamentoView extends VerticalLayout implements View{
 		body = createBody();
 		loadOrcamentos(new RepositoryChangedEvent("orcamentoRepository"));
 
-		eventBus = BeanContextAware.get().getBean("eventBus")
-		eventBus.register(this)
+		
+		addAttachListener(this)
 	}
 
+
+	/**
+	 * 
+	 * @see com.vaadin.server.ClientConnector.AttachListener#attach(com.vaadin.server.ClientConnector.AttachEvent)
+	 */
+	public void attach(AttachEvent event) {
+		eventBus = UI.data.eventBus
+		eventBus.register(this)		
+	}
 
 	private HorizontalLayout createTopbar(){
 		HorizontalLayout top = new HorizontalLayout();
@@ -143,4 +154,9 @@ class OrcamentoView extends VerticalLayout implements View{
 	@Override
 	public void enter(ViewChangeEvent event) {
 	}
+
+
+
+
+
 }
